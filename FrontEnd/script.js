@@ -45,11 +45,23 @@ filters.appendChild(filterItemFour);
 //     getFigures(objets);
 // })
 
+let prevClickedButton = null;
+
 filters.addEventListener("click", (event) => {
     if (event.target.tagName === "BUTTON") {
-
         const filterName = event.target.innerText;
         const gallery = document.querySelector(".gallery");
+
+        // Reset the background color of the previously clicked button
+        if (prevClickedButton) {
+            prevClickedButton.style.backgroundColor = ""; // Reset to default color
+            prevClickedButton.style.color = "";
+        }
+
+        // Set the background color of the currently clicked button
+        event.target.style.backgroundColor = "#1D6154";
+        event.target.style.color = "white";
+        prevClickedButton = event.target;
 
         switch (filterName) {
             case "Tous":
@@ -76,5 +88,3 @@ filters.addEventListener("click", (event) => {
         }
     }
 });
-
-
