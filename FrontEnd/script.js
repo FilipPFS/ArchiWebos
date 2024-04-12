@@ -19,7 +19,21 @@ function getFigures(figures) {
     })
 }
 
+function getImgGallery(figures) {
+    const menuGallery = document.querySelector(".menuGallery");
+
+    figures.map((figure) => {
+        const figureElement = document.createElement("figure");
+
+        figureElement.innerHTML =
+            `<img src=${figure.imageUrl}>`
+
+        menuGallery.appendChild(figureElement);
+    })
+}
+
 getFigures(figures);
+getImgGallery(figures);
 
 
 const filters = document.querySelector(".filters");
@@ -88,3 +102,36 @@ filters.addEventListener("click", (event) => {
         }
     }
 });
+
+
+const token = localStorage.getItem('token');
+const specialButton = document.querySelector('.gallery-edit-btn');
+
+console.log("Token", token)
+if (token) {
+    const linkLogin = document.getElementById("link-login");
+    specialButton.style.display = 'block';
+    linkLogin.innerText = "logout";
+
+    linkLogin.addEventListener("click", () => {
+        localStorage.removeItem('token');
+    })
+}
+
+specialButton.addEventListener("click", () => {
+    const overlay = document.querySelector(".overlay");
+    const modal = document.querySelector(".modal");
+
+    overlay.style.display = "block";
+    modal.style.display = "flex";
+})
+
+const clodeModal = document.querySelector(".close-modal");
+
+clodeModal.addEventListener("click", () => {
+    const overlay = document.querySelector(".overlay");
+    const modal = document.querySelector(".modal");
+
+    overlay.style.display = "none";
+    modal.style.display = "none";
+})

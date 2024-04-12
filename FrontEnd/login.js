@@ -22,7 +22,10 @@ form.addEventListener("submit", async function (e) {
         if (response.status === 200) {
             console.log("Succesffully connected.");
             token = response.data.token;
-            // window.location.href = "index.html";
+            if(token) {
+                localStorage.setItem('token', token);
+                window.location.href = "index.html";
+            }
         }
         
     } catch (error) {
@@ -40,4 +43,5 @@ form.addEventListener("submit", async function (e) {
     }
 });
 
-console.log("Token", token);
+
+
