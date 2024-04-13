@@ -297,6 +297,8 @@ li:hover {
 	margin-top: 10px;
 }
 
+/* Modals styling */
+
 .overlay {
 	position: fixed;
 	top: 0;
@@ -318,6 +320,14 @@ li:hover {
 	z-index: 1;
 	flex-direction: column;
 	align-items: center;
+	display: flex;
+}
+
+#firstModal {
+	display: none;
+}
+
+#secondModal {
 	display: none;
 }
 
@@ -336,6 +346,12 @@ li:hover {
 	right: 15px;
 }
 
+.prev-modal {
+	cursor: pointer;
+	position: absolute;
+	top: 10px;
+	left: 15px;
+}
 
 .menuGallery {
 	align-self: center;
@@ -345,12 +361,28 @@ li:hover {
 }
 
 .menuGallery figure {
+	position: relative;
 	padding-top: 15px;
 	width: 18.65%;
 }
 
 .menuGallery img {
 	width: 100%;
+}
+
+.menuGallery button {
+	position: absolute;
+	top: 18px;
+	right: 5px;
+	padding: 2px 4px;
+	border-radius: 2px;
+	background-color: black
+}
+
+.menuGallery i {
+	background-color: black;
+	color: white;
+	font-size: 12px;
 }
 
 .modal-btn {
@@ -360,6 +392,15 @@ li:hover {
 	font-family: Syne;
 	font-size: 12px;
 	border-radius: 20px;
+	cursor: pointer;
+}
+
+.modal-btn:hover {
+	background-color: #144e43;
+}
+
+.modal-btn:active {
+	background-color: #09372f;
 }
 
 .line {
@@ -367,6 +408,8 @@ li:hover {
 	width: 100%;
 	border: 1px solid #B3B3B3;
 }
+
+/* Contact */
 
 #contact {
 	width: 50%;

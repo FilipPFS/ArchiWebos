@@ -5,6 +5,8 @@ const portfolio = document.getElementById("portfolio");
 const response = await axios.get("http://localhost:5678/api/works");
 const figures = response.data;
 
+// Image galleries
+
 function getFigures(figures) {
     const gallery = document.querySelector(".gallery");
 
@@ -24,10 +26,32 @@ function getImgGallery(figures) {
 
     figures.map((figure) => {
         const figureElement = document.createElement("figure");
+        const deleteButton = document.createElement("button");
+        const icon = document.createElement("i");
+        icon.classList.add("fas", "fa-trash-alt");
+
+        deleteButton.addEventListener('click', async function () {
+            try {
+                const figureId = figureElement.getAttribute('data-id');
+
+                axios.delete(`http://localhost:5678/api/works/${figureId}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+                console.log('Deleted:', response.data);
+
+            } catch (error) {
+                console.error('Error deleting:', error);
+            }
+        });
 
         figureElement.innerHTML =
             `<img src=${figure.imageUrl}>`
 
+        deleteButton.appendChild(icon);
+        figureElement.setAttribute('data-id', figure.id);
+        figureElement.appendChild(deleteButton);
         menuGallery.appendChild(figureElement);
     })
 }
@@ -35,6 +59,73 @@ function getImgGallery(figures) {
 getFigures(figures);
 getImgGallery(figures);
 
+// Token
+
+const token = localStorage.getItem('token');
+const specialButton = document.querySelector('.gallery-edit-btn');
+
+console.log("Token", token)
+if (token) {
+    const linkLogin = document.getElementById("link-login");
+    specialButton.style.display = 'block';
+    linkLogin.innerText = "logout";
+
+    linkLogin.addEventListener("click", () => {
+        localStorage.removeItem('token');
+    })
+}
+
+specialButton.addEventListener("click", () => {
+    const overlay = document.querySelector(".overlay");
+    const modal = document.getElementById("firstModal");
+
+    overlay.style.display = "block";
+    modal.style.display = "flex";
+})
+
+const clodeModal = document.getElementById("close-mod-one");
+
+clodeModal.addEventListener("click", () => {
+    const overlay = document.querySelector(".overlay");
+    const firstModal = document.getElementById("firstModal");
+
+    overlay.style.display = "none";
+    firstModal.style.display = "none";
+})
+
+const firstModalBtn = document.getElementById("firstModal-btn");
+
+firstModalBtn.addEventListener("click", () => {
+    const overlay = document.querySelector(".overlay");
+    const firstModal = document.getElementById("firstModal");
+    const secondModal = document.getElementById("secondModal");
+
+    overlay.style.display = "block";
+    firstModal.style.display = "none";
+    secondModal.style.display = "flex";
+})
+
+const twoCloseModal = document.getElementById("close-mod-two");
+
+twoCloseModal.addEventListener("click", () => {
+    const overlay = document.querySelector(".overlay");
+    const secondModal = document.getElementById("secondModal");
+
+    overlay.style.display = "none";
+    secondModal.style.display = "none";
+})
+
+const prevModal = document.querySelector(".prev-modal");
+
+prevModal.addEventListener("click", () => {
+    const firstModal = document.getElementById("firstModal");
+    const secondModal = document.getElementById("secondModal");
+
+    firstModal.style.display = "flex";
+    secondModal.style.display = "none";
+})
+
+// Filters
 
 const filters = document.querySelector(".filters");
 const filterItemOne = document.createElement("button");
@@ -65,14 +156,12 @@ filters.addEventListener("click", (event) => {
     if (event.target.tagName === "BUTTON") {
         const filterName = event.target.innerText;
         const gallery = document.querySelector(".gallery");
-
-        // Reset the background color of the previously clicked button
+        
         if (prevClickedButton) {
-            prevClickedButton.style.backgroundColor = ""; // Reset to default color
+            prevClickedButton.style.backgroundColor = ""; 
             prevClickedButton.style.color = "";
         }
 
-        // Set the background color of the currently clicked button
         event.target.style.backgroundColor = "#1D6154";
         event.target.style.color = "white";
         prevClickedButton = event.target;
@@ -103,35 +192,3 @@ filters.addEventListener("click", (event) => {
     }
 });
 
-
-const token = localStorage.getItem('token');
-const specialButton = document.querySelector('.gallery-edit-btn');
-
-console.log("Token", token)
-if (token) {
-    const linkLogin = document.getElementById("link-login");
-    specialButton.style.display = 'block';
-    linkLogin.innerText = "logout";
-
-    linkLogin.addEventListener("click", () => {
-        localStorage.removeItem('token');
-    })
-}
-
-specialButton.addEventListener("click", () => {
-    const overlay = document.querySelector(".overlay");
-    const modal = document.querySelector(".modal");
-
-    overlay.style.display = "block";
-    modal.style.display = "flex";
-})
-
-const clodeModal = document.querySelector(".close-modal");
-
-clodeModal.addEventListener("click", () => {
-    const overlay = document.querySelector(".overlay");
-    const modal = document.querySelector(".modal");
-
-    overlay.style.display = "none";
-    modal.style.display = "none";
-})
