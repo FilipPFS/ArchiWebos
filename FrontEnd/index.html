@@ -14,6 +14,7 @@
 		rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
+	<link rel="stylesheet" href="./assets/modal.css">
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 	<script type="module" src="script.js"></script>
 </head>
@@ -47,6 +48,7 @@
 			</article>
 		</section>
 		<section id="portfolio">
+
 			<div class="menu-header">
 				<h2>Mes Projets</h2>
 				<button class="gallery-edit-btn">
@@ -54,10 +56,13 @@
 					modifier
 				</button>
 			</div>
+
 			<div class="filters"></div>
-			<div class="gallery">
-			</div>
+
+			<div class="gallery"></div>
+
 			<div class="overlay" id="overlay"></div>
+
 			<div class="modal" id="firstModal">
 				<span class="close-modal" id="close-mod-one"><i class="fa-solid fa-xmark"></i></span>
 				<div class="modal-block">
@@ -67,16 +72,40 @@
 					<button class="modal-btn" id="firstModal-btn">Ajouter une photo</button>
 				</div>
 			</div>
+
 			<div class="modal" id="secondModal">
 				<span class="close-modal" id="close-mod-two"><i class="fa-solid fa-xmark"></i></span>
 				<span class="prev-modal"><i class="fa-solid fa-arrow-left"></i></span>
 				<div class="modal-block">
 					<h3>Ajout Photo</h3>
+					<label for="imageUpload" class="add-photo-label">
+						<div class="image-content">
+							<i class="fa-regular fa-image"></i>
+							<span class="add-photo-block">+ Ajouter photo</span>
+							<span class="add-photo-info">jpg, png : 4mo max</span>
+							<input type="file" accept=".jpg, .jpeg, .png" id="imageUpload">
+						</div>
+						<img id="selectedImagePreview" class="selected-image-preview" style="display:none;" />
+					</label>
+					<div class="modal-inputs">
+						<label>Title</label>
+						<input type="text">
+					</div>
+					<div class="modal-inputs">
+						<label for="numberSelect">Catégorie</label>
+						<select id="numberSelect">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+						</select>
+					</div>
 					<span class="line"></span>
 					<button class="modal-btn" id="secondModal-btn">Valider</button>
 				</div>
 			</div>
 		</section>
+
 		<section id="contact">
 			<h2>Contact</h2>
 			<p>Vous avez un projet ? Discutons-en !</p>

@@ -120,10 +120,35 @@ const prevModal = document.querySelector(".prev-modal");
 prevModal.addEventListener("click", () => {
     const firstModal = document.getElementById("firstModal");
     const secondModal = document.getElementById("secondModal");
+    const imageInput = document.getElementById("imageUpload");
+    const imagePrewiev = document.getElementById('selectedImagePreview');
 
+    document.querySelector('.image-content').style.display = 'flex';
     firstModal.style.display = "flex";
     secondModal.style.display = "none";
+    imagePrewiev.src = "";
+    imagePrewiev.style.display = "none";
+    imageInput.value = "";
+
 })
+
+document.getElementById('imageUpload').addEventListener('change', function (event) {
+    const file = event.target.files[0];
+    const imgPreview = document.getElementById('selectedImagePreview');
+
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function (event) {
+            const imageUrl = event.target.result;
+            imgPreview.src = imageUrl;
+            imgPreview.style.display = 'block';
+
+            document.querySelector('.image-content').style.display = 'none';
+        };
+        reader.readAsDataURL(file);
+    }
+});
+
 
 // Filters
 
@@ -151,14 +176,18 @@ filters.appendChild(filterItemFour);
 // })
 
 let prevClickedButton = null;
+filterItemOne.style.backgroundColor = "#1D6154";
+filterItemOne.style.color = "white";
 
 filters.addEventListener("click", (event) => {
     if (event.target.tagName === "BUTTON") {
         const filterName = event.target.innerText;
         const gallery = document.querySelector(".gallery");
-        
+        filterItemOne.style.backgroundColor = "";
+        filterItemOne.style.color = "";
+
         if (prevClickedButton) {
-            prevClickedButton.style.backgroundColor = ""; 
+            prevClickedButton.style.backgroundColor = "";
             prevClickedButton.style.color = "";
         }
 

@@ -1,0 +1,190 @@
+* {
+    box-sizing: border-box;
+}
+
+.overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+	display: none;
+}
+
+.modal {
+	width: 33%;
+	box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+	background-color: white;
+	padding: 20px;
+	position: fixed;
+	top: 60px;
+	z-index: 1;
+	flex-direction: column;
+	align-items: center;
+	display: flex;
+}
+
+#firstModal {
+	display: none;
+}
+
+#secondModal {
+	display: none;
+}
+
+.modal-block {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 15px;
+	width: 80%;
+}
+
+.close-modal {
+	cursor: pointer;
+	position: absolute;
+	top: 10px;
+	right: 15px;
+}
+
+.prev-modal {
+	cursor: pointer;
+	position: absolute;
+	top: 10px;
+	left: 15px;
+}
+
+.modal-block h3 {
+	margin-top: 20px;
+}
+
+.menuGallery {
+	align-self: center;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 5px;
+}
+
+.menuGallery figure {
+	position: relative;
+	padding-top: 15px;
+	width: 18.66%;
+}
+
+.menuGallery img {
+	width: 100%;
+}
+
+.menuGallery button {
+	position: absolute;
+	top: 18px;
+	right: 5px;
+	padding: 1px 3px;
+	border-radius: 2px;
+	background-color: black;
+	cursor: pointer;
+}
+
+.menuGallery i {
+	background-color: black;
+	color: white;
+	font-size: 10px;
+}
+
+.menuGallery i:hover {
+	color: #B3B3B3;
+}
+
+.modal-btn {
+	width: 60%;
+	padding: 10px 0;
+	background-color: #1D6154;
+	color: white;
+	font-family: Syne;
+	font-size: 12px;
+	border-radius: 20px;
+	cursor: pointer;
+}
+
+.modal-btn:hover {
+	background-color: #144e43;
+}
+
+.modal-btn:active {
+	background-color: #09372f;
+}
+
+.line {
+	margin: 10px 0px;
+	width: 100%;
+	border: 1px solid #B3B3B3;
+}
+
+.add-photo-label {
+	box-sizing: border-box;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+    justify-content: center;
+	align-items: center;
+	background-color: #E8F1F6;
+    height: 146.25px;
+}
+
+.image-content {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.add-photo-label i {
+	color: #B9C5CC;
+	font-size: 60px;
+}
+
+.add-photo-block {
+	box-sizing: border-box;
+	color: #306685;
+	padding: 10px 30px;
+	border-radius: 50px;
+	font-size: 12px;
+	background-color: #CBD6DC;
+}
+
+#selectedImagePreview {
+    height: 146.25px;
+    width: 109.5px;
+
+}
+
+.add-photo-info {
+	font-size: 10px;
+}
+
+.add-photo-label input {
+	display: none;
+}
+
+.modal-inputs {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	width: 100%;
+}
+
+.modal-inputs input {
+	height: 30px;
+	background-color: white;
+    box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.09);
+	padding-left: 10px;
+}
+
+.modal-inputs select {
+	height: 30px;
+	background-color: white;
+    box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.09);
+	padding-left: 10px;
+	border: none;
+}
