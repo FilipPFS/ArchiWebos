@@ -1,7 +1,6 @@
 console.log("Connected.");
 
 const portfolio = document.getElementById("portfolio");
-
 const response = await axios.get("http://localhost:5678/api/works");
 const figures = response.data;
 
@@ -75,84 +74,80 @@ if (token) {
     })
 }
 
+const overlay = document.querySelector(".overlay");
+const firstModal = document.getElementById("firstModal");
+const firstModalBtn = document.getElementById("firstModal-btn");
+const secondModal = document.getElementById("secondModal");
+const prevModal = document.querySelector(".prev-modal");
+const imageInput = document.getElementById("imageUpload");
+const imagePreview = document.getElementById('selectedImagePreview');
+const closeModals = document.querySelectorAll(".close-modal");
+const imageContent = document.querySelector(".image-content");
+const uploadTitle = document.getElementById("upload-title")
+const numberSelect = document.getElementById("numberSelect");
+
 specialButton.addEventListener("click", () => {
-    const overlay = document.querySelector(".overlay");
-    const modal = document.getElementById("firstModal");
-
     overlay.style.display = "block";
-    modal.style.display = "flex";
-})
+    firstModal.style.display = "flex";
+});
 
-const clodeModal = document.getElementById("close-mod-one");
+function resetUpload() {
+    imagePreview.src = "";
+    imagePreview.style.display = "none";
+    imageInput.value = "";
+    uploadTitle.value = "";
+    numberSelect.value = "1";
+}
 
-clodeModal.addEventListener("click", () => {
-    const overlay = document.querySelector(".overlay");
-    const firstModal = document.getElementById("firstModal");
-
+function closeModal() {
+    imageContent.style.display = "flex";
     overlay.style.display = "none";
     firstModal.style.display = "none";
-})
+    secondModal.style.display = "none";
+    resetUpload();
+}
 
-const firstModalBtn = document.getElementById("firstModal-btn");
+closeModals.forEach(closeModalBtn => {
+    closeModalBtn.addEventListener("click", closeModal);
+});
 
 firstModalBtn.addEventListener("click", () => {
-    const overlay = document.querySelector(".overlay");
-    const firstModal = document.getElementById("firstModal");
-    const secondModal = document.getElementById("secondModal");
-
     overlay.style.display = "block";
     firstModal.style.display = "none";
     secondModal.style.display = "flex";
-})
-
-const twoCloseModal = document.getElementById("close-mod-two");
-
-twoCloseModal.addEventListener("click", () => {
-    const overlay = document.querySelector(".overlay");
-    const secondModal = document.getElementById("secondModal");
-
-    overlay.style.display = "none";
-    secondModal.style.display = "none";
-})
-
-const prevModal = document.querySelector(".prev-modal");
+});
 
 prevModal.addEventListener("click", () => {
-    const firstModal = document.getElementById("firstModal");
-    const secondModal = document.getElementById("secondModal");
-    const imageInput = document.getElementById("imageUpload");
-    const imagePrewiev = document.getElementById('selectedImagePreview');
-
-    document.querySelector('.image-content').style.display = 'flex';
+    overlay.style.display = "block";
+    imageContent.style.display = "flex";
     firstModal.style.display = "flex";
     secondModal.style.display = "none";
-    imagePrewiev.src = "";
-    imagePrewiev.style.display = "none";
-    imageInput.value = "";
-
-})
+    resetUpload();
+});
 
 document.getElementById('imageUpload').addEventListener('change', function (event) {
     const file = event.target.files[0];
-    const imgPreview = document.getElementById('selectedImagePreview');
 
     if (file) {
         const reader = new FileReader();
         reader.onload = function (event) {
             const imageUrl = event.target.result;
-            imgPreview.src = imageUrl;
-            imgPreview.style.display = 'block';
-
+            imagePreview.src = imageUrl;
+            imagePreview.style.display = 'block';
             document.querySelector('.image-content').style.display = 'none';
         };
         reader.readAsDataURL(file);
     }
 });
 
-
 // Filters
 
 const filters = document.querySelector(".filters");
+
+if(token) {
+    filters.style.display = "none";
+}
+
 const filterItemOne = document.createElement("button");
 const filterItemTwo = document.createElement("button");
 const filterItemThree = document.createElement("button");

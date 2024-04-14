@@ -1,5 +1,6 @@
 const form = document.querySelector(".login-form");
 let token = null;
+let userId = null;
 
 form.addEventListener("submit", async function (e) {
     e.preventDefault();
@@ -22,8 +23,11 @@ form.addEventListener("submit", async function (e) {
         if (response.status === 200) {
             console.log("Succesffully connected.");
             token = response.data.token;
+            userId = response.data.userId
+
             if(token) {
                 localStorage.setItem('token', token);
+                localStorage.setItem('userId', userId);
                 window.location.href = "index.html";
             }
         }
