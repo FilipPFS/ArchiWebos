@@ -25,7 +25,7 @@ function getImgGallery(figures) {
 
     figures.map((figure) => {
         const figureElement = document.createElement("figure");
-        const deleteButton = document.createElement("button");
+        const deleteButton = document.createElement("button");3343
         const icon = document.createElement("i");
         icon.classList.add("fas", "fa-trash-alt");
 
@@ -139,6 +139,34 @@ document.getElementById('imageUpload').addEventListener('change', function (even
         reader.readAsDataURL(file);
     }
 });
+
+const secondModalBtn = document.getElementById("secondModal-btn");
+
+secondModalBtn.addEventListener("click", async (event) => {
+    event.preventDefault();
+
+    try {
+        const titleInput = document.getElementById("upload-title").value;
+        const categorySelect = document.getElementById("numberSelect").value;
+        const imageInput = document.getElementById("imageUpload").files[0];
+
+        const formData = new FormData();
+        formData.append("title", titleInput);
+        formData.append("category", categorySelect);
+        formData.append("image", imageInput);
+
+        const response = await axios.post("http://localhost:5678/api/works", formData, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+                "Authorization": `Bearer ${token}`
+            }
+        });
+
+    } catch (error) {
+        console.error("Error posting data:", error);
+    }
+});
+
 
 // Filters
 
