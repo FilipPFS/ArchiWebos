@@ -25,7 +25,7 @@ function getImgGallery(figures) {
 
     figures.map((figure) => {
         const figureElement = document.createElement("figure");
-        const deleteButton = document.createElement("button");3343
+        const deleteButton = document.createElement("button"); 3343
         const icon = document.createElement("i");
         icon.classList.add("fas", "fa-trash-alt");
 
@@ -140,6 +140,9 @@ document.getElementById('imageUpload').addEventListener('change', function (even
     }
 });
 
+const errorMsg = document.createElement("p");
+errorMsg.classList.add("error-msg");
+secondModal.appendChild(errorMsg);
 const secondModalBtn = document.getElementById("secondModal-btn");
 
 secondModalBtn.addEventListener("click", async (event) => {
@@ -163,7 +166,11 @@ secondModalBtn.addEventListener("click", async (event) => {
         });
 
     } catch (error) {
-        console.error("Error posting data:", error);
+        if (error.response) {
+            if (error.response.status === 500) {
+                errorMsg.innerText = "Veuillez remplir tous les champs.";
+            }
+        }
     }
 });
 
@@ -172,7 +179,7 @@ secondModalBtn.addEventListener("click", async (event) => {
 
 const filters = document.querySelector(".filters");
 
-if(token) {
+if (token) {
     filters.style.display = "none";
 }
 
