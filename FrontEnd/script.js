@@ -68,9 +68,11 @@ if (token) {
     const linkLogin = document.getElementById("link-login");
     specialButton.style.display = 'block';
     linkLogin.innerText = "logout";
-
+    linkLogin.removeAttribute("href");
+    linkLogin.style.cursor = "pointer";
     linkLogin.addEventListener("click", () => {
         localStorage.removeItem('token');
+        location.reload();
     })
 }
 
@@ -85,6 +87,10 @@ const closeModals = document.querySelectorAll(".close-modal");
 const imageContent = document.querySelector(".image-content");
 const uploadTitle = document.getElementById("upload-title")
 const numberSelect = document.getElementById("numberSelect");
+
+overlay.addEventListener("click", () => {
+    closeModal();
+})
 
 specialButton.addEventListener("click", () => {
     overlay.style.display = "block";
