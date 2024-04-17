@@ -9,7 +9,7 @@ const figures = response.data;
 function getFigures(figures) {
     const gallery = document.querySelector(".gallery");
 
-    figures.map((figure) => {
+    figures.forEach((figure) => {
         const figureElement = document.createElement("figure");
 
         figureElement.innerHTML =
@@ -23,7 +23,7 @@ function getFigures(figures) {
 function getImgGallery(figures) {
     const menuGallery = document.querySelector(".menuGallery");
 
-    figures.map((figure) => {
+    figures.forEach((figure) => {
         const figureElement = document.createElement("figure");
         const deleteButton = document.createElement("button"); 3343
         const icon = document.createElement("i");
