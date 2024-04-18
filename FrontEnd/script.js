@@ -25,7 +25,7 @@ function getImgGallery(figures) {
 
     figures.forEach((figure) => {
         const figureElement = document.createElement("figure");
-        const deleteButton = document.createElement("button"); 3343
+        const deleteButton = document.createElement("button");
         const icon = document.createElement("i");
         icon.classList.add("fas", "fa-trash-alt");
 
@@ -145,6 +145,8 @@ document.getElementById('imageUpload').addEventListener('change', function (even
         reader.readAsDataURL(file);
     }
 });
+
+// Post image
 
 const errorMsg = document.createElement("p");
 errorMsg.classList.add("error-msg");
