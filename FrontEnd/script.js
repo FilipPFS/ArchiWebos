@@ -9,7 +9,7 @@ const figures = response.data;
 function getFigures(figures) {
     const gallery = document.querySelector(".gallery");
 
-    figures.map((figure) => {
+    figures.forEach((figure) => {
         const figureElement = document.createElement("figure");
 
         figureElement.innerHTML =
@@ -23,9 +23,9 @@ function getFigures(figures) {
 function getImgGallery(figures) {
     const menuGallery = document.querySelector(".menuGallery");
 
-    figures.map((figure) => {
+    figures.forEach((figure) => {
         const figureElement = document.createElement("figure");
-        const deleteButton = document.createElement("button"); 3343
+        const deleteButton = document.createElement("button");
         const icon = document.createElement("i");
         icon.classList.add("fas", "fa-trash-alt");
 
@@ -68,9 +68,11 @@ if (token) {
     const linkLogin = document.getElementById("link-login");
     specialButton.style.display = 'block';
     linkLogin.innerText = "logout";
-
+    linkLogin.removeAttribute("href");
+    linkLogin.style.cursor = "pointer";
     linkLogin.addEventListener("click", () => {
         localStorage.removeItem('token');
+        location.reload();
     })
 }
 
@@ -85,6 +87,10 @@ const closeModals = document.querySelectorAll(".close-modal");
 const imageContent = document.querySelector(".image-content");
 const uploadTitle = document.getElementById("upload-title")
 const numberSelect = document.getElementById("numberSelect");
+
+overlay.addEventListener("click", () => {
+    closeModal();
+})
 
 specialButton.addEventListener("click", () => {
     overlay.style.display = "block";
@@ -139,6 +145,8 @@ document.getElementById('imageUpload').addEventListener('change', function (even
         reader.readAsDataURL(file);
     }
 });
+
+// Post image
 
 const errorMsg = document.createElement("p");
 errorMsg.classList.add("error-msg");
