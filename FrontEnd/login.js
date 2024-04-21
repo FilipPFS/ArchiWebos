@@ -14,6 +14,9 @@ form.addEventListener("submit", async function (e) {
 
     if (!data.email || !data.password) {
         errorMsg.innerText = "Mot de passe et email sont obligatoires.";
+        setTimeout(() => {
+            errorMsg.innerText = "";
+        }, 2000)
         return;
     }
 
@@ -36,13 +39,22 @@ form.addEventListener("submit", async function (e) {
         if (error.response) {
             if (error.response.status === 401) {
                 errorMsg.innerText = "Mot de passe ou email est invalide.";
+                setTimeout(() => {
+                    errorMsg.innerText = "";
+                }, 2000)
             } else if (error.response.status === 404) {
                 console.log("Server or resource not found");
                 errorMsg.innerText = "L'utilisateur n'a pas été trouvé.";
+                setTimeout(() => {
+                    errorMsg.innerText = "";
+                }, 2000)
             }
         } else {
             console.error("Error occurred:", error.message);
             errorMsg.innerText = "Une erreur est survenue. Ressayez ultérieurement.";
+            setTimeout(() => {
+                errorMsg.innerText = "";
+            }, 2000)
         }
     }
 });

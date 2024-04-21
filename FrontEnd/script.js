@@ -177,6 +177,9 @@ secondModalBtn.addEventListener("click", async (event) => {
         if (error.response) {
             if (error.response.status === 500) {
                 errorMsg.innerText = "Veuillez remplir tous les champs.";
+                setTimeout(() => {
+                    errorMsg.innerText = "";
+                }, 2000)
             }
         }
     }
