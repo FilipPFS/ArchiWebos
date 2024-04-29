@@ -197,3 +197,14 @@
 	color: red;
 	margin-top: 20px;
 }
+
+/* Add these styles to your CSS */
+#secondModal-btn[disabled] {
+    /* Change background color and text color */
+    background-color: #dddddd;
+    color: #aaaaaa;
+    /* Reduce opacity */
+    opacity: 0.7;
+    /* Change cursor style */
+    cursor: not-allowed;
+}

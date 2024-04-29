@@ -103,6 +103,7 @@ function resetUpload() {
     imageInput.value = "";
     uploadTitle.value = "";
     numberSelect.value = "1";
+    checkInputs();
 }
 
 function closeModal() {
@@ -135,16 +136,22 @@ document.getElementById('imageUpload').addEventListener('change', function (even
     const file = event.target.files[0];
 
     if (file) {
-        const reader = new FileReader();
-        reader.onload = function (event) {
-            const imageUrl = event.target.result;
-            imagePreview.src = imageUrl;
-            imagePreview.style.display = 'block';
-            document.querySelector('.image-content').style.display = 'none';
-        };
-        reader.readAsDataURL(file);
+        if (file.size <= 4 * 1024 * 1024) {
+            const reader = new FileReader();
+            reader.onload = function (event) {
+                const imageUrl = event.target.result;
+                imagePreview.src = imageUrl;
+                imagePreview.style.display = 'block';
+                document.querySelector('.image-content').style.display = 'none';
+            };
+            reader.readAsDataURL(file);
+        } else {
+            alert("La taille de l'image doit être inférieur à 4mo.");
+            event.target.value = ''; 
+        }
     }
 });
+
 
 // Post image
 
@@ -153,13 +160,38 @@ errorMsg.classList.add("error-msg");
 secondModal.appendChild(errorMsg);
 const secondModalBtn = document.getElementById("secondModal-btn");
 
+function checkInputs() {
+    const titleInput = uploadTitle.value;
+    const categorySelect = document.getElementById("numberSelect").value;
+    const myImageInput = imageInput.value;
+
+    if (titleInput && categorySelect && myImageInput) {
+        secondModalBtn.disabled = false;
+    } else {
+        secondModalBtn.disabled = true;
+    }
+}
+
+document.getElementById("upload-title").addEventListener("input", checkInputs);
+document.getElementById("numberSelect").addEventListener("change", checkInputs);
+document.getElementById("imageUpload").addEventListener("change", checkInputs);
+
 secondModalBtn.addEventListener("click", async (event) => {
+    console.log("clicked");
     event.preventDefault();
 
     try {
         const titleInput = document.getElementById("upload-title").value;
         const categorySelect = document.getElementById("numberSelect").value;
         const imageInput = document.getElementById("imageUpload").files[0];
+
+        if (!titleInput || !categorySelect || !imageInput) {
+            errorMsg.innerText = "Veuillez remplir tous les champs.";
+            setTimeout(() => {
+                errorMsg.innerText = "";
+            }, 2000)
+            return;
+        }
 
         const formData = new FormData();
         formData.append("title", titleInput);
@@ -174,17 +206,16 @@ secondModalBtn.addEventListener("click", async (event) => {
         });
 
     } catch (error) {
-        if (error.response) {
-            if (error.response.status === 500) {
-                errorMsg.innerText = "Veuillez remplir tous les champs.";
-                setTimeout(() => {
-                    errorMsg.innerText = "";
-                }, 2000)
-            }
+        if (error.response && error.response.status === 500) {
+            errorMsg.innerText = "Veuillez remplir tous les champs.";
+            setTimeout(() => {
+                errorMsg.innerText = "";
+            }, 2000)
         }
     }
 });
 
+checkInputs();
 
 // Filters
 
