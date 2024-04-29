@@ -33,11 +33,12 @@ function getImgGallery(figures) {
             try {
                 const figureId = figureElement.getAttribute('data-id');
 
-                axios.delete(`http://localhost:5678/api/works/${figureId}`, {
+                const response = await axios.delete(`http://localhost:5678/api/works/${figureId}`, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
                 });
+
                 console.log('Deleted:', response.data);
 
             } catch (error) {
@@ -147,7 +148,7 @@ document.getElementById('imageUpload').addEventListener('change', function (even
             reader.readAsDataURL(file);
         } else {
             alert("La taille de l'image doit être inférieur à 4mo.");
-            event.target.value = ''; 
+            event.target.value = '';
         }
     }
 });
@@ -239,13 +240,6 @@ filters.appendChild(filterItemOne);
 filters.appendChild(filterItemTwo);
 filters.appendChild(filterItemThree);
 filters.appendChild(filterItemFour);
-
-// filterItemTwo.addEventListener("click", () => {
-//     const objets = figures.filter(figure => figure.category.name === "Objets");
-//     console.log("clicked")
-//     const gallery = document.querySelector(".gallery").innerHTML = "";
-//     getFigures(objets);
-// })
 
 let prevClickedButton = null;
 filterItemOne.style.backgroundColor = "#1D6154";
