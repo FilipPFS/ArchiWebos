@@ -147,7 +147,7 @@ document.getElementById('imageUpload').addEventListener('change', function (even
             };
             reader.readAsDataURL(file);
         } else {
-            alert("La taille de l'image doit être inférieur à 4mo.");
+            alert("La taille de l'image doit être 4mo maximum.");
             event.target.value = '';
         }
     }
